@@ -32,7 +32,7 @@ public class dsa {
 
             // Convert the XHTML, and add it into the empty docx we made
             wordMLPackage.getMainDocumentPart().getContent().addAll(
-                    xHTMLImporter.convert(new File(inputfilepath), null) );
+                    xHTMLImporter.convert(new File(inputfilepath), null));
 
         }
 
@@ -42,20 +42,18 @@ public class dsa {
 
         wordMLPackage.save(new java.io.File(System.getProperty("user.dir") + "/html_output.docx") );
         String s=wordMLPackage.getMainDocumentPart().getXML();
-        P p = (P)wordMLPackage.getMainDocumentPart().getJaxbElement().getBody().getContent().get(1);
-        R r = (R)p.getContent().get(0);
+        R r = (R)((P)(wordMLPackage.getMainDocumentPart().getJaxbElement().getBody().getContent().get(1))).getContent().get(0);
         Text t = (Text)r.getContent().get(0);
 
-        //a.getClass().toString();
-        //wordMLPackage.getMainDocumentPart().;
         if(wordMLPackage.getMainDocumentPart().getJaxbElement().getBody().getContent().get(2).getClass()==P.class)
         {
-            System.out.printf("yes");
+            System.out.println("yes");
         }
         else
         {
-            System.out.printf("No");
+            System.out.println("No");
         }
+        System.out.println(XmlUtils.marshaltoString(r));
 
 
     }
